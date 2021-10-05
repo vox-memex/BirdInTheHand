@@ -19,7 +19,7 @@ The following **optional** features are implemented:
 - [x] User can view more tweets as they scroll with infinite pagination
 - [ ] Improve the user interface and theme the app to feel "twitter branded"
 - [x] Links in tweets are clickable and will launch the web browser
-- [ ] User can tap a tweet to display a "detailed" view of that tweet
+- [x] User can tap a tweet to display a "detailed" view of that tweet
 - [ ] User can see embedded image media within the tweet detail view
 - [ ] User can watch embedded video within the tweet
 - [ ] User can open the twitter app offline and see last loaded tweets
@@ -33,13 +33,16 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='Peek-wt1-birdinthehand.gif' title='Video Walkthrough' width=250 alt='Video Walkthrough' />
+<img src='Peek-wt1-BirdInTheHand.gif' title='Video Walkthrough' width=250 alt='Video Walkthrough' />
+
+<img src='Peek-wt2-BirdInTheHand.gif' title='Video Walkthrough' width=250 alt='Video Walkthrough' />
 
 GIF created with [Peek](https://github.com/phw/peek).
 
 ## Notes
 
-Challenges: For this week's assignment I tried to rely less on the video walkthroughs and follow the written concepts, however I found it harder but much more rewarding since some of the code present in the written walk throughs are different from what was needed to be implemented. Figuring out what needed to be changed and where was quite challenging. 
+Challenges: For this week's assignment I tried to rely less on the video walkthroughs and follow the written concepts, however I found it harder but much more rewarding since some of the code present in the written walk throughs are different from what was needed to be implemented. Figuring out what needed to be changed and where was quite challenging.
+The stretch stories are quite challening also, due to time constraints I will not be able to complete the ones I set out to complete, namely the embedded images and video player. 
 
 ## Open-source libraries used
 
@@ -48,7 +51,7 @@ Challenges: For this week's assignment I tried to rely less on the video walkthr
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2021] [Jules B.]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
