@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.codepath.apps.restclienttemplate.models.Tweet;
 
 import org.parceler.Parcels;
@@ -40,7 +41,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvTweetBody.setText(tweet.body);
 
         if(!tweet.imageEmbedded.equals("no-image")) {
-            Glide.with(this).load(tweet.imageEmbedded).into(ivEmbedded);
+            Glide.with(this).load(tweet.imageEmbedded).centerCrop().transform(new RoundedCorners(30)).into(ivEmbedded);
         }
     }
 }
