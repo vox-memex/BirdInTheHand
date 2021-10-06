@@ -19,7 +19,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
     TextView tvTweetName;
     TextView tvTweetScreenName;
     TextView tvTweetBody;
-    //ImageView ivTweetEmbedded;
+    ImageView ivEmbedded;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +30,7 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvTweetName = findViewById(R.id.tvTweetName);
         tvTweetScreenName = findViewById(R.id.tvTweetScreenName);
         tvTweetBody = findViewById(R.id.tvTweetBody);
-        //ivTweetEmbedded = findViewById(R.id.ivTweetEmbedded);
+        ivEmbedded = findViewById(R.id.ivEmbedded);
 
         tweet = (Tweet) Parcels.unwrap(getIntent().getParcelableExtra("tweetDetail"));
 
@@ -38,5 +38,9 @@ public class TweetDetailsActivity extends AppCompatActivity {
         tvTweetName.setText(tweet.user.name);
         tvTweetScreenName.setText(tweet.user.screenName);
         tvTweetBody.setText(tweet.body);
+
+        if(!tweet.imageEmbedded.equals("no-image")) {
+            Glide.with(this).load(tweet.imageEmbedded).into(ivEmbedded);
+        }
     }
 }

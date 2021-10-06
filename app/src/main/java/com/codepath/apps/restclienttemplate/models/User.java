@@ -10,6 +10,7 @@ public class User {
     public String screenName;
     public String profileImageURL;
 
+    //Empty Constructor needed for Parceler
     public User(){}
 
     public static User fromJson(JSONObject jsonObject) throws JSONException {

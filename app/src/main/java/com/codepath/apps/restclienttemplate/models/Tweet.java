@@ -1,5 +1,7 @@
 package com.codepath.apps.restclienttemplate.models;
 
+import android.util.Log;
+
 import com.codepath.apps.restclienttemplate.TimeFormatter;
 
 import org.json.JSONArray;
@@ -16,7 +18,7 @@ public class Tweet {
     public String createdAt;
     public User user;
 
-    //public String imageEmbedded;
+    public String imageEmbedded;
 
     public long id;
 
@@ -30,6 +32,26 @@ public class Tweet {
         tweet.createdAt = TimeFormatter.getTimeDifference(jsonObject.getString("created_at"));
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.id = jsonObject.getLong("id");
+
+
+        JSONObject tweet_entities = jsonObject.getJSONObject("entities");
+
+        if (tweet_entities.has("media")) {
+
+            JSONArray media = tweet_entities.getJSONArray("media");
+
+            for (int e = 0; e < media.length(); e++){
+                //Log.i("media_length", String.valueOf(media.length()));
+                JSONObject media_entities = media.getJSONObject(e);
+
+                if (media_entities.getString("type").equals("photo")) {
+                    //Log.i("media_entities", media_entities.getString("media_url_https"));
+                    tweet.imageEmbedded = media_entities.getString("media_url_https");
+                }
+            }
+        } else {
+            tweet.imageEmbedded = "no-image";
+        }
 
         return tweet;
     }
