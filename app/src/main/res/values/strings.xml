@@ -5,5 +5,7 @@
     <string name="login_label">Sign In To Twitter</string>
     <string name="intent_scheme">oauth</string>
     <string name="intent_host">cprest</string>
+    <string name="tweet">Tweet</string>
+    <string name="reply">Reply</string>
 
 </resources>

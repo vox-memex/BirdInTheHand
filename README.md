@@ -1,29 +1,31 @@
 # Project 2 - *BirdInTheHand*
 
-**BirdInTheHand** is an android app that allows a user to view his Twitter timeline. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
+**BirdInTheHand** is an android app that allows a user to view his Twitter timeline and post a new tweet. The app utilizes [Twitter REST API](https://dev.twitter.com/rest/public).
 
-Time spent: **6.5** hours spent in total
+Time spent: **8** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-- [x] User can **sign in to Twitter** using OAuth login
-- [x]	User can **view tweets from their home timeline**
-  - [x] User is displayed the username, name, and body for each tweet
-  - [x] User is displayed the [relative timestamp](https://gist.github.com/nesquena/f786232f5ef72f6e10a7) for each tweet "8m", "7h"
-- [x] User can refresh tweets timeline by pulling down to refresh
+- [x] User can **compose and post a new tweet**
+  - [x] User can click a “Compose” icon in the Action Bar on the top right
+  - [x] User can then enter a new tweet and post this to twitter
+  - [x] User is taken back to home timeline with **new tweet visible** in timeline
+  - [x] Newly created tweet should be manually inserted into the timeline and not rely on a full refresh
+  - [x] User can **see a counter with total number of characters left for tweet** on compose tweet page
 
 The following **optional** features are implemented:
 
-- [x] User can view more tweets as they scroll with infinite pagination
-- [ ] Improve the user interface and theme the app to feel "twitter branded"
-- [x] Links in tweets are clickable and will launch the web browser
-- [x] User can tap a tweet to display a "detailed" view of that tweet
-- [ ] User can see embedded image media within the tweet detail view
-- [ ] User can watch embedded video within the tweet
-- [ ] User can open the twitter app offline and see last loaded tweets
-- [ ] On the Twitter timeline, leverage the CoordinatorLayout to apply scrolling behavior that hides / shows the toolbar.
+- [x] User is using **"Twitter branded" colors and styles**
+- [x] User can click links in tweets launch the web browser 
+- [x] User can **select "reply" from detail view to respond to a tweet**
+- [ ] The "Compose" action is moved to a FloatingActionButton instead of on the AppBar
+- [ ] Compose tweet functionality is build using modal overlay
+- [x] Use Parcelable instead of Serializable using the popular [Parceler library](http://guides.codepath.org/android/Using-Parceler).
+- [ ] User can **open the twitter app offline and see last loaded tweets**. Persisted in SQLite tweets are refreshed on every application launch. While "live data" is displayed when app can get it from Twitter API, it is also saved for use in offline mode.
+- [ ] When a user leaves the compose view without publishing and there is existing text, prompt to save or delete the draft. If saved, the draft should then be **persisted to disk** and can later be resumed from the compose view.
+- [ ] Enable your app to receive implicit intents from other apps. When a link is shared from a web browser, it should pre-fill the text and title of the web page when composing a tweet. 
 
 The following **additional** features are implemented:
 
@@ -33,16 +35,13 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='Peek-wt1-BirdInTheHand.gif' title='Video Walkthrough' width=250 alt='Video Walkthrough' />
-
-<img src='Peek-wt2-BirdInTheHand.gif' title='Video Walkthrough' width=250 alt='Video Walkthrough' />
+<img src='Peek-wt3-BirdInTheHand.gif' title='Video Walkthrough Week 2' width=250 alt='Video Walkthrough Week 2' />
 
 GIF created with [Peek](https://github.com/phw/peek).
 
 ## Notes
 
-Challenges: For this week's assignment I tried to rely less on the video walkthroughs and follow the written concepts, however I found it harder but much more rewarding since some of the code present in the written walk throughs are different from what was needed to be implemented. Figuring out what needed to be changed and where was quite challenging.
-The stretch stories are quite challening also, due to time constraints I will not be able to complete the ones I set out to complete, namely the embedded images and video player. 
+Challenges: Core/required stories where completed realatively easily and quickly since I had much more knowledge from working with the Twitter API last week. Majority of the challenge came from trying to the implement the reply action from the detailed view. I started by creating a brand new activity but realised I could utilize the exsisting ComposeActivity to send replies, so it was challenging using a single Activity i.e. ComposeActivity, to handle both send a new tweet and replying to a tweet.
 
 ## Open-source libraries used
 
@@ -51,7 +50,7 @@ The stretch stories are quite challening also, due to time constraints I will no
 
 ## License
 
-    Copyright [2021] [Jules B.]
+    Copyright 2021 Jules B.
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.

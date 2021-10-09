@@ -24,6 +24,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
+        android:fontFamily="@font/helveticaneueltpro_75bold"
+        android:textColor="@color/twitterBlack"
         android:textSize="16sp"
         android:textStyle="bold"
         tools:text="Random User" />
@@ -36,6 +38,8 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/tvName"
+        android:fontFamily="@font/helveticaneueltpro_55roman"
+        android:textColor="@color/twitterBlue"
         android:textSize="14sp"
         tools:text="@random_user" />
 
@@ -48,6 +52,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginBottom="3dp"
         android:layout_toEndOf="@+id/tvScreenName"
+        android:fontFamily="@font/helveticaneueltpro_55roman"
         android:gravity="right"
         android:textSize="14sp"
         tools:text="2m ago" />
@@ -62,7 +67,9 @@
         android:layout_marginTop="0dp"
         android:layout_toEndOf="@+id/ivProfileImage"
         android:autoLink="web"
+        android:fontFamily="@font/helveticaneueltpro_55roman"
         android:linksClickable="true"
+        android:textColor="@color/twitterBlack"
         tools:text="This is a tweet sample body" />
 
 </RelativeLayout>
