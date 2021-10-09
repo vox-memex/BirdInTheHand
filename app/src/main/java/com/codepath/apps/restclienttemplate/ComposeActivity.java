@@ -20,6 +20,8 @@ import org.json.JSONException;
 import org.parceler.Parcel;
 import org.parceler.Parcels;
 
+import java.util.Locale;
+
 import okhttp3.Headers;
 
 public class ComposeActivity extends AppCompatActivity {
@@ -27,6 +29,7 @@ public class ComposeActivity extends AppCompatActivity {
     public static final int MAX_TWEET_LENGTH = 140;
     public static final String TAG = "ComposeActivity";
 
+    TextView tvComposeAction;
     EditText etCompose;
     Button btnTweet;
     TextView tvCharacterCount;
@@ -38,12 +41,19 @@ public class ComposeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_compose);
 
-        client = TwitterApp.getRestClient(ComposeActivity.this);
+        if(getSupportActionBar() != null) { getSupportActionBar().hide();}
 
+        client = TwitterApp.getRestClient(ComposeActivity.this);
+        tvComposeAction = findViewById(R.id.tvComposeAction);
         etCompose = findViewById(R.id.etCompose);
         btnTweet = findViewById(R.id.btnTweet);
-
         tvCharacterCount = findViewById(R.id.tvCharacterCount);
+
+        if (getIntent().getStringExtra("action").equals("New Tweet")){
+            tvComposeAction.setText(getIntent().getStringExtra("action"));
+        } else {
+            tvComposeAction.setText(String.format("Reply to %s", getIntent().getStringExtra("screenName")));
+        }
 
         etCompose.addTextChangedListener(new TextWatcher() {
             @Override
@@ -57,7 +67,8 @@ public class ComposeActivity extends AppCompatActivity {
 
                 btnTweet.setEnabled(etComposeContent.length() <= MAX_TWEET_LENGTH);
 
-                String etComposeContentFormat = etComposeContent.length() + "/" + MAX_TWEET_LENGTH;
+                //String etComposeContentFormat = etComposeContent.length() + "/" + MAX_TWEET_LENGTH;
+                String etComposeContentFormat = String.format(Locale.US,"%d / %d", etComposeContent.length(), MAX_TWEET_LENGTH);
 
                 tvCharacterCount.setText(etComposeContentFormat);
 
@@ -87,31 +98,64 @@ public class ComposeActivity extends AppCompatActivity {
                     return;
                 }
 
-                //Make API call to Twitter.
-                client.postUserTweet(new JsonHttpResponseHandler() {
-                    @Override
-                    public void onSuccess(int statusCode, Headers headers, JSON json) {
-                        Log.i(TAG, "onSuccess: Tweet Published");
-                        try {
-                            Tweet tweet = Tweet.fromJson(json.jsonObject);
-                            Log.i(TAG, String.valueOf(tweet.body));
+                //Make API call to Twitter depending on action
+                String action = getIntent().getStringExtra("action");
 
-                            Intent intent = new Intent();
-                            intent.putExtra("tweet", Parcels.wrap(tweet));
-                            setResult(RESULT_OK, intent);
+                if ( action.equals("New Tweet") ) {
+                    client.postUserTweet(new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            Log.i(TAG, "onSuccess: Tweet Published");
+                            try {
+                                Tweet tweet = Tweet.fromJson(json.jsonObject);
+                                Log.i(TAG, String.valueOf(tweet.body));
 
-                            finish();
+                                Intent intent = new Intent();
+                                intent.putExtra("tweet", Parcels.wrap(tweet));
+                                setResult(RESULT_OK, intent);
 
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                                finish();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
-                    }
 
-                    @Override
-                    public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                        Log.e(TAG, "onFail: Compose Tweet", throwable);
-                    }
-                }, tweetContent);
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "onFail: Compose Tweet", throwable);
+                        }
+                    }, tweetContent);
+                }
+
+                if ( action.equals("Reply") ) {
+                    String screenName = getIntent().getStringExtra("screenName");
+                    long tweetId = Long.parseLong(getIntent().getStringExtra("tweetId"));
+
+                    client.replyToTweet(new JsonHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Headers headers, JSON json) {
+                            try {
+                                Tweet tweet = Tweet.fromJson(json.jsonObject);
+                                Log.i(TAG, String.valueOf(tweet.body));
+
+                                Intent intent = new Intent();
+                                intent.putExtra("tweet", Parcels.wrap(tweet));
+                                setResult(RESULT_OK, intent);
+
+                                finish();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                            Log.e(TAG, "onFail: Reply to Tweet", throwable);
+                        }
+                    }, String.format("%s %s", screenName, tweetContent), tweetId);
+                }
             }
         });
     }

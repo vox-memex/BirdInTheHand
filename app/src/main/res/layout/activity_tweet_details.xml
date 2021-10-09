@@ -8,8 +8,8 @@
 
     <ImageView
         android:id="@+id/ivDetailProfilePic"
-        android:layout_width="90dp"
-        android:layout_height="90dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
@@ -22,9 +22,12 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_marginStart="5dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="5dp"
         android:layout_toEndOf="@+id/ivDetailProfilePic"
+        android:fontFamily="@font/helveticaneueltpro_75bold"
+        android:textColor="@color/twitterBlack"
         android:textSize="16sp"
+        android:textStyle="bold"
         tools:text="John Doe" />
 
     <TextView
@@ -32,9 +35,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTweetName"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="4dp"
         android:layout_toEndOf="@+id/ivDetailProfilePic"
+        android:fontFamily="@font/helveticaneueltpro_55roman"
+        android:textColor="@color/twitterBlue"
         tools:text="@john_doe" />
 
     <TextView
@@ -45,9 +50,11 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
-        android:textSize="20sp"
         android:autoLink="web"
+        android:fontFamily="@font/helveticaneueltpro_55roman"
         android:linksClickable="true"
+        android:textColor="@color/twitterBlack"
+        android:textSize="20sp"
         tools:text="This is my first tweet!" />
 
     <ImageView
@@ -55,8 +62,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tvTweetBody"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="10dp"
-        android:padding="10dp"
+        android:layout_marginEnd="5dp"
+        android:adjustViewBounds="true"
+        android:padding="5dp"
         tools:srcCompat="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/btnReply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:backgroundTint="@color/twitterBlue"
+        android:text="@string/reply"
+        android:textColor="@color/twitterBlack" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        app:srcCompat="@drawable/twitter_logo" />
 
 </RelativeLayout>

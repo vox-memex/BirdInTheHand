@@ -33,7 +33,6 @@ public class Tweet {
         tweet.user = User.fromJson(jsonObject.getJSONObject("user"));
         tweet.id = jsonObject.getLong("id");
 
-
         JSONObject tweet_entities = jsonObject.getJSONObject("entities");
 
         if (tweet_entities.has("media")) {

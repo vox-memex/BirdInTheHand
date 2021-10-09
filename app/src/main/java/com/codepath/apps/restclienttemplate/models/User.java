@@ -21,6 +21,5 @@ public class User {
         user.profileImageURL = jsonObject.getString("profile_image_url_https").replace("normal", "bigger");
 
         return user;
-
     }
 }
